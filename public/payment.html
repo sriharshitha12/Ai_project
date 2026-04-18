@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Payment</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+  <button class="close-btn" onclick="closeSidebar()">✕</button>
+  <a href="next.html">Home</a>
+  <a href="categories.html">Categories</a>
+  <a href="women.html">Women</a>
+  <a href="men.html">Men</a>
+  <a href="kids.html">Kids</a>
+  <a href="cart.html">Cart</a>
+  <a href="ai.html">AI Stylist</a>
+</div>
+
+<!-- CART -->
+<div class="cart-fixed" onclick="window.location.href='cart.html'">
+  🛒 <span class="cart-count" id="cartCount">0</span>
+</div>
+
+<!-- NAVBAR -->
+<header class="fashion-navbar">
+  <div class="nav-left">+ contact us</div>
+  <div class="nav-center">Fashion Hub</div>
+  <div class="nav-right">
+    <span class="search-icon">&#9906;</span>
+    <span class="menu-icon" onclick="openSidebar()">&#9776;</span>
+  </div>
+</header>
+
+<h1 class="page-title">Secure Payment</h1>
+
+<div class="payment-container">
+
+  <div class="payment-left">
+    <h2 class="payment-title">Choose Payment Method</h2>
+
+    <div class="payment-method active" onclick="selectPayment('card', this)">
+      <span class="payment-icon">💳</span>
+      <span>Credit / Debit Card</span>
+    </div>
+
+    <div class="payment-method" onclick="selectPayment('upi', this)">
+      <span class="payment-icon">📱</span>
+      <span>UPI Payment</span>
+    </div>
+
+    <div class="payment-method" onclick="selectPayment('cod', this)">
+      <span class="payment-icon">💵</span>
+      <span>Cash on Delivery</span>
+    </div>
+
+    <div id="cardForm" class="payment-form">
+      <input type="text" id="cardName" placeholder="Cardholder Name" class="payment-input">
+      <input type="text" id="cardNumber" placeholder="Card Number" class="payment-input">
+      <div class="payment-row">
+        <input type="text" id="expiry" placeholder="MM/YY" class="payment-input">
+        <input type="password" id="cvv" placeholder="CVV" class="payment-input">
+      </div>
+    </div>
+
+    <div id="upiForm" class="payment-form hidden">
+      <input type="text" id="upiId" placeholder="Enter UPI ID (example@upi)" class="payment-input">
+    </div>
+
+    <div id="codForm" class="payment-form hidden">
+      <div class="cod-box">
+        Pay when your order is delivered to your address.
+      </div>
+    </div>
+
+    <button class="pay-now-btn" onclick="placeOrder()">PLACE ORDER</button>
+  </div>
+
+  <div class="payment-right">
+    <h2 class="payment-title">Order Summary</h2>
+    <div id="paymentSummary"></div>
+    <h3 id="paymentTotal" class="summary-total"></h3>
+  </div>
+
+</div>
+
+<script>
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let selectedMethod = "card";
+
+  function updateCartCount() {
+    const countElement = document.getElementById("cartCount");
+    if (countElement) {
+      countElement.textContent = cart.length;
+    }
+  }
+
+  function openSidebar() {
+    document.getElementById("sidebar").style.right = "0";
+  }
+
+  function closeSidebar() {
+    document.getElementById("sidebar").style.right = "-260px";
+  }
+
+  function selectPayment(method, element) {
+    selectedMethod = method;
+
+    document.querySelectorAll(".payment-method").forEach(item => {
+      item.classList.remove("active");
+    });
+    element.classList.add("active");
+
+    document.getElementById("cardForm").classList.add("hidden");
+    document.getElementById("upiForm").classList.add("hidden");
+    document.getElementById("codForm").classList.add("hidden");
+
+    if (method === "card") {
+      document.getElementById("cardForm").classList.remove("hidden");
+    } else if (method === "upi") {
+      document.getElementById("upiForm").classList.remove("hidden");
+    } else {
+      document.getElementById("codForm").classList.remove("hidden");
+    }
+  }
+
+  function renderSummary() {
+    const summary = document.getElementById("paymentSummary");
+    const totalEl = document.getElementById("paymentTotal");
+
+    summary.innerHTML = "";
+
+    if (cart.length === 0) {
+      summary.innerHTML = "<p class='empty-cart'>No items in cart</p>";
+      totalEl.textContent = "";
+      return;
+    }
+
+    let total = 0;
+
+    cart.forEach(item => {
+      total += item.price;
+      summary.innerHTML += `
+        <div class="summary-item">
+          <img src="${item.image}" class="summary-image" />
+          <div>
+            <p><strong>${item.name}</strong></p>
+            <p>Size: ${item.size}</p>
+            <p>Rs. ${item.price}</p>
+          </div>
+        </div>
+      `;
+    });
+
+    totalEl.textContent = "Total: Rs. " + total;
+  }
+
+  function placeOrder() {
+    if (cart.length === 0) {
+      alert("Your cart is empty");
+      return;
+    }
+
+    if (selectedMethod === "card") {
+      const cardName = document.getElementById("cardName").value.trim();
+      const cardNumber = document.getElementById("cardNumber").value.trim();
+      const expiry = document.getElementById("expiry").value.trim();
+      const cvv = document.getElementById("cvv").value.trim();
+
+      if (!cardName || !cardNumber || !expiry || !cvv) {
+        alert("Please fill all card details");
+        return;
+      }
+    }
+
+    if (selectedMethod === "upi") {
+      const upiId = document.getElementById("upiId").value.trim();
+      if (!upiId) {
+        alert("Please enter UPI ID");
+        return;
+      }
+    }
+
+    document.body.innerHTML = `
+      <div class="success-box">
+        <div class="tick">✔</div>
+        <h2>Your Order is Placed</h2>
+        <p>Thanks for choosing <b>Fashion Hub</b></p>
+      </div>
+    `;
+
+    localStorage.removeItem("cart");
+  }
+
+  updateCartCount();
+  renderSummary();
+</script>
+
+</body>
+</html>

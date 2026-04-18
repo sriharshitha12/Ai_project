@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fashion Hub - Home</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="sidebar" id="sidebar">
+  <button class="close-btn" onclick="closeSidebar()">✕</button>
+  <a href="next.html">Home</a>
+  <a href="categories.html">Categories</a>
+  <a href="women.html">Women</a>
+  <a href="men.html">Men</a>
+  <a href="kids.html">Kids</a>
+  <a href="cart.html">Cart</a>
+  <a href="ai.html">AI Stylist</a>
+</div>
+
+<div class="cart-fixed special-cart" onclick="window.location.href='cart.html'">
+  🛒
+  <span class="cart-count" id="cartCount">0</span>
+</div>
+
+<div class="fashion-home">
+  <header class="fashion-navbar">
+    <div class="nav-left">+ contact us</div>
+    <div class="nav-center">Fashion Hub</div>
+    <div class="nav-right">
+
+      <!-- ✅ UPDATED SEARCH -->
+      <div class="search-wrapper">
+        <span class="search-icon" onclick="toggleSearch()">&#9906;</span>
+        <div id="searchBox" class="search-box">
+          <input type="text" id="searchInput" placeholder="Search product..." />
+          <button onclick="searchProduct()">Go</button>
+        </div>
+      </div>
+
+      <span class="menu-icon" onclick="openSidebar()">&#9776;</span>
+    </div>
+  </header>
+
+  <main class="fashion-content">
+    <section class="hero-section">
+      <div class="hero-image-box">
+        <img src="/images/pic%20girl.jpeg" alt="Girl Fashion" class="hero-image" />
+      </div>
+
+      <div class="hero-text">
+        <p>Style. Confidence. Fashion Hub.</p>
+
+        <div class="hero-buttons">
+          <button class="discover-btn" onclick="window.location.href='categories.html'">
+            discover more
+          </button>
+
+          <button class="ai-icon-btn" onclick="window.location.href='ai.html'">
+            🤖
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="style-section">
+      <div class="boy-image-box">
+        <img src="/images/boy2.jpg" alt="Boy Fashion" class="boy-image" />
+      </div>
+
+      <div class="style-text-box">
+        <h2>Redefine Your<br>style</h2>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+  const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+  const cartCount = document.getElementById("cartCount");
+  if (cartCount) {
+    cartCount.textContent = cartItems.length;
+  }
+
+  function openSidebar() {
+    document.getElementById("sidebar").style.right = "0";
+  }
+
+  function closeSidebar() {
+    document.getElementById("sidebar").style.right = "-260px";
+  }
+
+  // ✅ SEARCH TOGGLE
+  function toggleSearch() {
+    const box = document.getElementById("searchBox");
+    box.style.display = box.style.display === "block" ? "none" : "block";
+  }
+
+  // ✅ SEARCH LOGIC
+  function searchProduct() {
+    let query = document.getElementById("searchInput").value.toLowerCase();
+
+    if (!query) return;
+
+    if (query.includes("women") || query.includes("dress") || query.includes("top")) {
+      window.location.href = "women.html";
+    } 
+    else if (query.includes("men") || query.includes("shirt") || query.includes("jacket")) {
+      window.location.href = "men.html";
+    } 
+    else if (query.includes("kids")) {
+      window.location.href = "kids.html";
+    } 
+    else {
+      alert("No results found");
+    }
+  }
+</script>
+
+</body>
+</html>

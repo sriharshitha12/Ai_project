@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Kids Collection</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+  <button class="close-btn" onclick="closeSidebar()">✕</button>
+  <a href="next.html">Home</a>
+  <a href="categories.html">Categories</a>
+  <a href="women.html">Women</a>
+  <a href="men.html">Men</a>
+  <a href="kids.html">Kids</a>
+  <a href="cart.html">Cart</a>
+  <a href="ai.html">AI Stylist</a>
+</div>
+
+<!-- CART -->
+<div class="cart-fixed" onclick="window.location.href='cart.html'">
+  🛒 <span class="cart-count" id="cartCount">0</span>
+</div>
+
+<!-- NAVBAR -->
+<header class="fashion-navbar">
+  <div class="nav-left">+ contact us</div>
+  <div class="nav-center">Fashion Hub</div>
+  <div class="nav-right">
+    <span class="search-icon">&#9906;</span>
+    <span class="menu-icon" onclick="openSidebar()">&#9776;</span>
+  </div>
+</header>
+
+<h1 class="page-title">Kids Collection</h1>
+
+<div class="product-grid">
+
+  <div class="product-card" onclick="window.location.href='kids-product1.html'">
+    <img src="https://i.pinimg.com/474x/14/c0/ff/14c0ff2a25e6fe396533dbfcfebc88a9.jpg" />
+    <p>Kids Casual Wear</p>
+    <p>Rs. 999</p>
+  </div>
+
+  <div class="product-card" onclick="window.location.href='kids-product2.html'">
+    <img src="https://i.pinimg.com/736x/2b/2d/b5/2b2db5d22e143367b2fcfa8fad41133f.jpg" />
+    <p>Kids Party Dress</p>
+    <p>Rs. 1,299</p>
+  </div>
+
+  <div class="product-card" onclick="window.location.href='kids-product3.html'">
+    <img src="https://images.unsplash.com/photo-1522771930-78848d9293e8" />
+    <p>Comfort Outfit</p>
+    <p>Rs. 899</p>
+  </div>
+
+  <div class="product-card" onclick="window.location.href='kids-product4.html'">
+    <img src="https://pub-95ccf2d427eb4955a7de1c41d3fa57dd.r2.dev/blog-g3fashion-com/2020/07/55d87e235813fe57d080e8de9bc79650-1-e1632306298933.jpg" />
+    <p>Trendy Kids Wear</p>
+    <p>Rs. 1,199</p>
+  </div>
+
+</div>
+
+<script>
+  // CART COUNT
+  const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+  const cartCount = document.getElementById("cartCount");
+  if (cartCount) {
+    cartCount.textContent = cartItems.length;
+  }
+
+  // SIDEBAR
+  function openSidebar() {
+    document.getElementById("sidebar").style.right = "0";
+  }
+
+  function closeSidebar() {
+    document.getElementById("sidebar").style.right = "-260px";
+  }
+</script>
+
+</body>
+</html>

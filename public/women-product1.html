@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Product Details</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+  <button class="close-btn" onclick="closeSidebar()">✕</button>
+  <a href="next.html">Home</a>
+  <a href="categories.html">Categories</a>
+  <a href="women.html">Women</a>
+  <a href="men.html">Men</a>
+  <a href="kids.html">Kids</a>
+  <a href="cart.html">Cart</a>
+  <a href="ai.html">AI Stylist</a>
+</div>
+
+<!-- CART -->
+<div class="cart-fixed" onclick="window.location.href='cart.html'">
+  🛒 <span class="cart-count" id="cartCount">0</span>
+</div>
+
+<!-- NAVBAR -->
+<header class="fashion-navbar">
+  <div class="nav-left">+ contact us</div>
+  <div class="nav-center">Fashion Hub</div>
+  <div class="nav-right">
+    <span class="search-icon">&#9906;</span>
+    <span class="menu-icon" onclick="openSidebar()">&#9776;</span>
+  </div>
+</header>
+
+<h1 class="page-title">Product Details</h1>
+
+<div class="product-detail-box">
+
+  <img
+    src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=800&q=80"
+    style="width:100%; height:350px; object-fit:cover; border-radius:10px;"
+  />
+
+  <h2>Casual Dress</h2>
+  <p class="detail-price">Rs. 2,499</p>
+
+  <select id="size" class="detail-select">
+    <option value="">Select Size</option>
+    <option>S</option>
+    <option>M</option>
+    <option>L</option>
+    <option>XL</option>
+  </select>
+
+  <button class="detail-btn">VIEW SIZE GUIDE</button>
+  <button class="detail-btn" onclick="addToCart()">ADD TO CART</button>
+  <button class="detail-btn">FIND IN STORE</button>
+
+</div>
+
+<script>
+  // CART COUNT
+  const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+  const cartCount = document.getElementById("cartCount");
+  if (cartCount) {
+    cartCount.textContent = cartItems.length;
+  }
+
+  // SIDEBAR
+  function openSidebar() {
+    document.getElementById("sidebar").style.right = "0";
+  }
+
+  function closeSidebar() {
+    document.getElementById("sidebar").style.right = "-260px";
+  }
+
+  // ADD TO CART
+  function addToCart() {
+    const size = document.getElementById("size").value;
+
+    if (size === "") {
+      alert("Please select a size");
+      return;
+    }
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const product = {
+      name: "Casual Dress",
+      price: 2499,
+      size: size,
+      image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=800&q=80"
+    };
+
+    cart.push(product);
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    alert("Added to cart");
+  }
+</script>
+
+</body>
+</html>

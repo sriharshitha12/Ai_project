@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Men Collection</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+  <button class="close-btn" onclick="closeSidebar()">✕</button>
+  <a href="next.html">Home</a>
+  <a href="categories.html">Categories</a>
+  <a href="women.html">Women</a>
+  <a href="men.html">Men</a>
+  <a href="kids.html">Kids</a>
+  <a href="cart.html">Cart</a>
+  <a href="ai.html">AI Stylist</a>
+</div>
+
+<!-- CART -->
+<div class="cart-fixed" onclick="window.location.href='cart.html'">
+  🛒 <span class="cart-count" id="cartCount">0</span>
+</div>
+
+<!-- NAVBAR -->
+<header class="fashion-navbar">
+  <div class="nav-left">+ contact us</div>
+  <div class="nav-center">Fashion Hub</div>
+  <div class="nav-right">
+    <span class="search-icon">&#9906;</span>
+    <span class="menu-icon" onclick="openSidebar()">&#9776;</span>
+  </div>
+</header>
+
+<h1 class="page-title">Men Collection</h1>
+
+<div class="product-grid">
+
+  <div class="product-card" onclick="window.location.href='men-product1.html'">
+    <img src="/images/men1.jpeg" />
+    <p>Regular Fit Shirt</p>
+    <p>Rs. 2,299</p>
+  </div>
+
+  <div class="product-card" onclick="window.location.href='men-product2.html'">
+    <img src="https://assets.myntassets.com/dpr_1.5,q_30,w_400,c_limit,fl_progressive/assets/images/30026532/2025/7/4/9faa2837-2899-4d34-967f-ef3640037c241751645065686-Urbano-Fashion-Mens-Light-Grey-Regular-Fit-Washed-Full-Sleev-1.jpg" />
+    <p>Casual Denim Jacket</p>
+    <p>Rs. 1,999</p>
+  </div>
+
+  <div class="product-card" onclick="window.location.href='men-product3.html'">
+    <img src="/images/men2.jpeg" />
+    <p>Black Graphic Print Shirt</p>
+    <p>Rs. 2,499</p>
+  </div>
+
+  <div class="product-card" onclick="window.location.href='men-product4.html'">
+    <img src="/images/men3.jpeg" />
+    <p>Classic Fit Shirt</p>
+    <p>Rs. 1,499</p>
+  </div>
+
+</div>
+
+<script>
+  // CART COUNT
+  const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+  const cartCount = document.getElementById("cartCount");
+  if (cartCount) {
+    cartCount.textContent = cartItems.length;
+  }
+
+  // SIDEBAR
+  function openSidebar() {
+    document.getElementById("sidebar").style.right = "0";
+  }
+
+  function closeSidebar() {
+    document.getElementById("sidebar").style.right = "-260px";
+  }
+</script>
+
+</body>
+</html>

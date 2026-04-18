@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fashion Hub - Create Account</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="login-page">
+    <div class="main-title">Fashion Hub</div>
+
+    <div class="login-box">
+      <button class="back-btn" onclick="goBackToLogin()">← Back</button>
+
+      <h2 class="login-heading">CREATE ACCOUNT</h2>
+
+      <form id="signupForm">
+        <label>Email :</label>
+        <input type="email" id="signupEmail" required />
+
+        <label>Create Password :</label>
+        <input type="password" id="signupPassword" required />
+
+        <label>Confirm Password :</label>
+        <input type="password" id="confirmPassword" required />
+
+        <button type="submit" class="login-btn">CONFIRM</button>
+        <p id="signupError" class="error-text"></p>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
